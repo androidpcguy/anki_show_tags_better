@@ -1,0 +1,16 @@
+.tag-div {
+    word-break: break-word;
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 2px;
+    margin: 10px 0 10px 0;
+    width: fit-content;
+}
+
+.tag-div:hover:nth-child(odd) {
+	border-color: lightgray;
+}
+
+.tag-div:hover {
+	font-weight: 900;
+}
