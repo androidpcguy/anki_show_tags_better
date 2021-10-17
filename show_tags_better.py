@@ -5,6 +5,9 @@ from aqt import gui_hooks
 from aqt.webview import WebContent
 from anki.notes import Note
 from aqt import mw
+from anki import version as anki_version
+
+anki_version = int(anki_version[-2:])
 
 config = mw.addonManager.getConfig(__name__)
 show_at_bottom = f"{config['bottom']}"
@@ -26,7 +29,11 @@ def showTags(editor: aqt.editor.Editor):
     #print(type(tags))
 
     tags.insert(0, f"{show_at_bottom}")
-    editor.web.eval(f"showTags({tags});")
+    
+    if anki_version >= 45:
+        editor.web.eval(f"showTags({tags});")
+    else: 
+        editor.web.eval(f"oldShowTags({tags});")
 
 
 def on_webview_will_set_content(web_content: WebContent, context):
