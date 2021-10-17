@@ -4,6 +4,10 @@ from PyQt5 import QtWidgets
 from aqt import gui_hooks
 from aqt.webview import WebContent
 from anki.notes import Note
+from aqt import mw
+
+config = mw.addonManager.getConfig(__name__)
+show_at_bottom = f"{config['bottom']}"
 
 # create class to store current tags
 # on tags edited --> update tag cache locally --> hook to update tag display
@@ -21,6 +25,7 @@ def showTags(editor: aqt.editor.Editor):
 
     #print(type(tags))
 
+    tags.insert(0, f"{show_at_bottom}")
     editor.web.eval(f"showTags({tags});")
 
 
